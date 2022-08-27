@@ -19,5 +19,6 @@ using packer:
 - run `Inject` command
 - reload the file with `:edit`
 
+![image](https://user-images.githubusercontent.com/22427111/187039159-2250c244-1334-4a0e-af9e-a35ea8a2eba1.png)
 ![image](https://user-images.githubusercontent.com/22427111/187037000-06113832-5ffe-4dc1-9fa6-e3821e04a04b.png)
 ![image](https://user-images.githubusercontent.com/22427111/187037016-71a84744-66bf-4c4a-b3b9-b9b2b063a5ae.png)
