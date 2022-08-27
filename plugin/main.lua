@@ -1,5 +1,12 @@
 local parsers = require "nvim-treesitter.parsers"
 
+local function rep(s, n)
+    local t = {}
+    for i = 1, n do
+        t[i] = s
+    end
+    return unpack(t, 1, n)
+end
 
 local function inject()
     local lang_tree = parsers.get_parser(0)
@@ -25,7 +32,7 @@ local function inject()
         (#offset! @%s 0 1 0 -1)
     )
 )
-]]           , known_lang, known_lang, known_lang, known_lang, known_lang, known_lang)
+]]           , rep(known_lang, 6))
 
         end
     elseif lang == "rust" then
@@ -46,7 +53,7 @@ local function inject()
         (#offset! @%s 0 3 0 -3)
     )
 )
-]]           , known_lang, known_lang, known_lang, known_lang, known_lang, known_lang)
+]]           , rep(known_lang, 6))
         end
     elseif lang == "lua" then
         -- comment [0, 10] - [0, 22]
@@ -69,7 +76,7 @@ local function inject()
         (#offset! @%s 0 2 0 -2)
     )
 )
-]]           , known_lang, known_lang, known_lang, known_lang, known_lang, known_lang, known_lang, known_lang, known_lang)
+]]           , rep(known_lang, 9))
         end
     else
         print("Please PR this language!")
