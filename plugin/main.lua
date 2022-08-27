@@ -8,6 +8,8 @@ local function rep(s, n)
     return unpack(t, 1, n)
 end
 
+local all_langs = { 'rust', 'lua', 'python', 'typescript', 'query' }
+
 local function inject()
     local lang_tree = parsers.get_parser(0)
     local lang = lang_tree:lang()
@@ -15,7 +17,6 @@ local function inject()
     local query = ""
 
     if lang == "typescript" then
-        local all_langs = { 'rust', 'lua', 'python' }
         for _, known_lang in ipairs(all_langs) do
             query = query .. string.format(--[[query]] [[
 (
@@ -36,7 +37,6 @@ local function inject()
 
         end
     elseif lang == "rust" then
-        local all_langs = { 'typescript', 'lua', 'python' }
         for _, known_lang in ipairs(all_langs) do
             query = query .. string.format(--[[query]] [[
 (
@@ -59,7 +59,6 @@ local function inject()
         -- comment [0, 10] - [0, 22]
         -- expression_list [0, 22] - [0, 33]
         --   value: string [0, 22] - [0, 33]
-        local all_langs = { 'rust', 'typescript', 'query' }
         for _, known_lang in ipairs(all_langs) do
             query = query .. string.format(--[[query]] [[
 (
