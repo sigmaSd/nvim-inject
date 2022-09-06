@@ -77,6 +77,30 @@ local function inject()
 )
 ]]           , rep(known_lang, 9))
         end
+    elseif lang == "python" then
+        -- python have no special string type
+        -- and the comments can be inline
+        -- so we only handle a special syntax
+        --
+        -- #rust
+        -- code = """let a = 4;"""
+        --
+
+        for _, known_lang in ipairs(all_langs) do
+            query = query .. string.format(--[[query]] [[
+(
+    (comment) @_comment (#contains? @_comment "%s") .
+    (expression_statement
+      (assignment
+          (identifier)
+          (string) @%s
+          (#lua-match? @%s "^\"\"\"")
+          (#offset! @%s 0 3 0 -3)
+          )
+    )
+)
+]]           , rep(known_lang, 4))
+        end
     else
         print("Please PR this language!")
     end
