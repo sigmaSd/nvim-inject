@@ -8,7 +8,7 @@ local function rep(s, n)
     return unpack(t, 1, n)
 end
 
-local all_langs = { 'rust', 'lua', 'python', 'typescript', 'query' }
+local all_langs = { 'rust', 'lua', 'python', 'typescript', 'query', 'html' }
 
 local function inject()
     local lang_tree = parsers.get_parser(0)
@@ -79,7 +79,7 @@ local function inject()
         end
     elseif lang == "python" then
         -- python have no special string type
-        -- and the comments can be inline
+        -- and the comments can *not* be inline
         -- so we only handle a special syntax
         --
         -- #rust
@@ -108,4 +108,8 @@ local function inject()
     require("vim.treesitter.query").set_query(lang, "injections", query)
 end
 
-vim.api.nvim_create_user_command("Inject", inject, {})
+vim.api.nvim_create_user_command("Inject", function()
+    vim.cmd(":w")
+    inject()
+    vim.cmd(":e")
+end, {})
