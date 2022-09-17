@@ -8,7 +8,7 @@ local function rep(s, n)
     return unpack(t, 1, n)
 end
 
-local all_langs = { 'rust', 'lua', 'python', 'typescript', 'query', 'html' }
+local all_langs = { 'rust', 'lua', 'python', 'typescript', 'query', 'html', 'javascript' }
 
 local function inject()
     local lang_tree = parsers.get_parser(0)
